@@ -1,7 +1,6 @@
 import UIKit
 
 final class MovieQuizViewController: UIViewController {
-    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         showCurrentQuestion()
@@ -53,14 +52,12 @@ final class MovieQuizViewController: UIViewController {
     private var currentQuestionIndex = 0
     private var correctAnswers = 0
     
-    // Для состояния "Вопрос показан"
     struct QuizStepViewModel {
         let image: UIImage
         let question: String
         let questionNumber: String
     }
     
-    // Для состояния "Результат квиза"
     struct QuizResultsViewModel {
         let title: String
         let text: String
@@ -104,7 +101,6 @@ final class MovieQuizViewController: UIViewController {
     }
     
     private func showAnswerResult(isCorrect: Bool) {
-        // Изменение цвета рамки изображения в зависимости от правильности ответа
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
         imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
@@ -113,9 +109,7 @@ final class MovieQuizViewController: UIViewController {
             correctAnswers += 1
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            // Убираем рамку после задержки
             self.imageView.layer.borderWidth = 0
-            // Переходим к следующему вопросу или результатам
             self.showNextQuestionOrResults()
         }
     }
